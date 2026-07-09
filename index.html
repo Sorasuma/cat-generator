@@ -9,14 +9,13 @@
 
 <h1>Cat Costume Creator</h1>
 
-<div class="app">
+<div class="layout">
 
 <div class="panel">
-<h2>Области обрезки</h2>
 
-<label><input id="bodyCheck" type="checkbox" checked> Тело</label>
+<h2>Модель кота</h2>
 
-<label><input id="earsCheck" type="checkbox" checked> Уши</label>
+<label>Уши</label>
 <select id="ears">
 <option>прямые</option>
 <option>вислые</option>
@@ -25,7 +24,7 @@
 <option>кёрл</option>
 </select>
 
-<label><input id="maneCheck" type="checkbox" checked> Грива</label>
+<label>Грива</label>
 <select id="mane">
 <option>none</option>
 <option>умеренная</option>
@@ -33,7 +32,7 @@
 <option>пышная</option>
 </select>
 
-<label><input id="tailCheck" type="checkbox" checked> Хвост</label>
+<label>Хвост</label>
 <select id="tail">
 <option>куцый</option>
 <option>тонкий</option>
@@ -44,28 +43,42 @@
 <option>беличий</option>
 </select>
 
+
+<h2>Области обрезки</h2>
+
+<label><input id="cutBody" type="checkbox" checked> Тело</label>
+<label><input id="cutEars" type="checkbox" checked> Уши</label>
+<label><input id="cutMane" type="checkbox" checked> Грива</label>
+<label><input id="cutTail" type="checkbox" checked> Хвост</label>
+
+
 <h2>Костюм</h2>
-<input id="costume" type="file" accept="image/png">
+<input id="upload" type="file" accept="image/png">
 
-<button id="crop">Обрезать</button>
+<button id="crop">Обрезать костюм</button>
 
-<p id="status"></p>
 </div>
 
-<div class="box">
+
+<div class="window">
 <h2>Модель + костюм</h2>
-<canvas id="model" width="200" height="300"></canvas>
+<canvas id="preview" width="200" height="300"></canvas>
 </div>
 
-<div class="box">
+
+<div class="window">
 <h2>Обрезанный костюм</h2>
 <canvas id="result" width="200" height="300"></canvas>
 </div>
 
 </div>
 
+
+<div class="save">
 <input id="filename" placeholder="Название файла">
-<button id="download">Скачать PNG</button>
+<button id="save">Скачать PNG</button>
+</div>
+
 
 <script src="script.js"></script>
 </body>

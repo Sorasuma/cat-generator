@@ -1,101 +1,153 @@
 
-const model=document.getElementById("model");
+const preview=document.getElementById("preview");
 const result=document.getElementById("result");
-const ctx=model.getContext("2d");
+
+const pctx=preview.getContext("2d");
 const rctx=result.getContext("2d");
 
 let costume=null;
 
-const status=document.getElementById("status");
 
-function img(src){
+function load(src){
 return new Promise((resolve,reject)=>{
-let i=new Image();
-i.onload=()=>resolve(i);
-i.onerror=()=>reject(src);
-i.src=src;
+let img=new Image();
+img.onload=()=>resolve(img);
+img.onerror=()=>reject(src);
+img.src=src;
 });
 }
 
-async function layer(c,src){
+
+async function drawLayer(ctx,path){
 try{
-let i=await img(src);
-c.drawImage(i,0,0,200,300);
-return true;
-}catch(e){
-status.textContent="Не найден: "+src;
-return false;
-}
+let img=await load(path);
+ctx.drawImage(img,0,0,200,300);
+}catch(e){}
 }
 
-async function createMask(){
+
+async function createModel(){
+
 let c=document.createElement("canvas");
-c.width=200;c.height=300;
-let x=c.getContext("2d");
+c.width=200;
+c.height=300;
 
-if(bodyCheck.checked) await layer(x,"assets/body.png");
-if(earsCheck.checked) await layer(x,`assets/ears/${ears.value}.png`);
-if(maneCheck.checked && mane.value!="none") await layer(x,`assets/mane/${mane.value}.png`);
-if(tailCheck.checked) await layer(x,`assets/tails/${tail.value}.png`);
+let ctx=c.getContext("2d");
+
+await drawLayer(ctx,"assets/body.png");
+await drawLayer(ctx,`assets/mane/${mane.value}.png`);
+await drawLayer(ctx,`assets/ears/${ears.value}.png`);
+await drawLayer(ctx,`assets/tails/${tail.value}.png`);
 
 return c;
 }
 
-async function render(){
-ctx.clearRect(0,0,200,300);
-rctx.clearRect(0,0,200,300);
 
-let mask=await createMask();
-ctx.drawImage(mask,0,0);
+async function createCutMask(){
+
+let c=document.createElement("canvas");
+c.width=200;
+c.height=300;
+
+let ctx=c.getContext("2d");
+
+if(cutBody.checked)
+await drawLayer(ctx,"assets/body.png");
+
+if(cutMane.checked && mane.value!="none")
+await drawLayer(ctx,`assets/mane/${mane.value}.png`);
+
+if(cutEars.checked)
+await drawLayer(ctx,`assets/ears/${ears.value}.png`);
+
+if(cutTail.checked)
+await drawLayer(ctx,`assets/tails/${tail.value}.png`);
+
+return c;
+}
+
+
+async function render(){
+
+pctx.clearRect(0,0,200,300);
+
+let model=await createModel();
+
+pctx.drawImage(model,0,0);
+
 
 if(costume){
-let i=await img(costume);
-ctx.globalAlpha=.8;
-ctx.drawImage(i,0,0,200,300);
-ctx.globalAlpha=1;
+
+let img=await load(costume);
+
+pctx.globalAlpha=.75;
+pctx.drawImage(img,0,0,200,300);
+pctx.globalAlpha=1;
+
 }
+
 }
+
 
 async function crop(){
+
 rctx.clearRect(0,0,200,300);
-let mask=await createMask();
 
-if(!costume)return;
+if(!costume) return;
 
-let i=await img(costume);
+let mask=await createCutMask();
+
+let img=await load(costume);
+
 let c=document.createElement("canvas");
-c.width=200;c.height=300;
+c.width=200;
+c.height=300;
 
-let x=c.getContext("2d");
-x.drawImage(i,0,0,200,300);
-x.globalCompositeOperation="destination-in";
-x.drawImage(mask,0,0);
+let ctx=c.getContext("2d");
+
+ctx.drawImage(img,0,0,200,300);
+
+ctx.globalCompositeOperation="destination-in";
+ctx.drawImage(mask,0,0);
 
 rctx.drawImage(c,0,0);
+
 }
 
-document.querySelectorAll("input,select").forEach(e=>{
-e.onchange=render;
+
+document.querySelectorAll("select").forEach(el=>{
+el.addEventListener("change",render);
 });
 
-document.getElementById("costume").onchange=e=>{
-let r=new FileReader();
-r.onload=()=>{
-costume=r.result;
+
+document.getElementById("upload").onchange=e=>{
+let reader=new FileReader();
+
+reader.onload=()=>{
+costume=reader.result;
 render();
 };
-r.readAsDataURL(e.target.files[0]);
+
+reader.readAsDataURL(e.target.files[0]);
 };
+
 
 document.getElementById("crop").onclick=crop;
 
-document.getElementById("download").onclick=()=>{
-let n=document.getElementById("filename").value.trim()||"costume";
-if(!n.endsWith(".png"))n+=".png";
+
+document.getElementById("save").onclick=()=>{
+
+let name=document.getElementById("filename").value.trim() || "costume";
+
+if(!name.endsWith(".png"))
+name+=".png";
+
 let a=document.createElement("a");
-a.download=n;
-a.href=result.toDataURL();
+a.download=name;
+a.href=result.toDataURL("image/png");
 a.click();
+
 };
+
 
 render();
