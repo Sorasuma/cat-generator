@@ -1,6 +1,131 @@
 
-body{background:#181818;color:white;font-family:Arial;display:flex;flex-direction:column;align-items:center}
-.app{display:flex;gap:25px;margin-top:20px}.panel,.box{background:#303030;padding:20px;border-radius:16px}
-.panel{width:260px}.box{text-align:center}canvas{width:200px;height:300px;background:#222}
-select,input{width:100%;margin:8px 0;padding:8px;box-sizing:border-box}button{background:#43b83f;color:white;border:0;padding:12px 25px;border-radius:10px}
-.save{display:flex;gap:15px;margin-top:20px;width:520px}
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+min-height:100vh;
+background:#191919;
+color:#f5f5f5;
+font-family:'Montserrat',sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.app{
+display:flex;
+gap:24px;
+align-items:flex-start;
+margin-top:40px;
+}
+
+.panel,
+.preview{
+background:#303030;
+border-radius:22px;
+padding:22px;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.panel{
+width:280px;
+}
+
+.preview{
+width:250px;
+text-align:center;
+}
+
+h2{
+font-size:20px;
+font-weight:700;
+margin:0 0 18px;
+}
+
+select,
+input[type="file"],
+.save input{
+width:100%;
+height:38px;
+border-radius:12px;
+border:0;
+padding:0 12px;
+margin-bottom:14px;
+font-family:inherit;
+}
+
+.check{
+display:flex;
+align-items:center;
+gap:10px;
+margin:12px 0;
+font-size:14px;
+font-weight:500;
+}
+
+.check input{
+appearance:none;
+width:18px;
+height:18px;
+border-radius:50%;
+background:#777;
+margin:0;
+position:relative;
+cursor:pointer;
+flex:none;
+}
+
+.check input:checked{
+background:#D36C07;
+}
+
+.check input:checked::after{
+content:"";
+position:absolute;
+inset:5px;
+border-radius:50%;
+background:white;
+}
+
+canvas{
+width:200px;
+height:300px;
+background:#222;
+border-radius:14px;
+}
+
+button{
+background:rgba(211,108,7,.95);
+color:white;
+border:1px solid rgba(255,255,255,.15);
+border-radius:999px;
+padding:12px 28px;
+font-family:inherit;
+font-weight:700;
+cursor:pointer;
+box-shadow:
+0 8px 20px rgba(211,108,7,.25),
+inset 0 1px 0 rgba(255,255,255,.25);
+transition:.2s;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+.save{
+display:flex;
+gap:16px;
+width:520px;
+margin-top:25px;
+}
+
+.save input{
+flex:1;
+}
+
+.mode{
+margin-top:10px;
+}
