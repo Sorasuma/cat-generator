@@ -1,118 +1,101 @@
 
-const model = document.getElementById("model");
-const result = document.getElementById("result");
-const ctx = model.getContext("2d");
-const rctx = result.getContext("2d");
+const model=document.getElementById("model");
+const result=document.getElementById("result");
+const ctx=model.getContext("2d");
+const rctx=result.getContext("2d");
 
-const costumeInput = document.getElementById("costume");
-const cropButton = document.getElementById("crop");
+let costume=null;
 
-let costume = null;
+const status=document.getElementById("status");
 
-function loadImage(src){
-    return new Promise((resolve,reject)=>{
-        const img = new Image();
-        img.onload = ()=>resolve(img);
-        img.onerror = reject;
-        img.src = src;
-    });
+function img(src){
+return new Promise((resolve,reject)=>{
+let i=new Image();
+i.onload=()=>resolve(i);
+i.onerror=()=>reject(src);
+i.src=src;
+});
 }
 
-async function drawLayer(context, src){
-    try{
-        const img = await loadImage(src);
-        context.drawImage(img,0,0,200,300);
-    }catch(e){}
+async function layer(c,src){
+try{
+let i=await img(src);
+c.drawImage(i,0,0,200,300);
+return true;
+}catch(e){
+status.textContent="Не найден: "+src;
+return false;
+}
 }
 
 async function createMask(){
-    const canvas = document.createElement("canvas");
-    canvas.width = 200;
-    canvas.height = 300;
-    const c = canvas.getContext("2d");
+let c=document.createElement("canvas");
+c.width=200;c.height=300;
+let x=c.getContext("2d");
 
-    if(useBody.checked)
-        await drawLayer(c,"assets/body.png");
+if(bodyCheck.checked) await layer(x,"assets/body.png");
+if(earsCheck.checked) await layer(x,`assets/ears/${ears.value}.png`);
+if(maneCheck.checked && mane.value!="none") await layer(x,`assets/mane/${mane.value}.png`);
+if(tailCheck.checked) await layer(x,`assets/tails/${tail.value}.png`);
 
-    if(useEars.checked)
-        await drawLayer(c,`assets/ears/${ears.value}.png`);
+return c;
+}
 
-    if(useMane.checked && mane.value !== "none")
-        await drawLayer(c,`assets/mane/${mane.value}.png`);
+async function render(){
+ctx.clearRect(0,0,200,300);
+rctx.clearRect(0,0,200,300);
 
-    if(useTail.checked)
-        await drawLayer(c,`assets/tails/${tail.value}.png`);
+let mask=await createMask();
+ctx.drawImage(mask,0,0);
 
-    return canvas;
+if(costume){
+let i=await img(costume);
+ctx.globalAlpha=.8;
+ctx.drawImage(i,0,0,200,300);
+ctx.globalAlpha=1;
+}
 }
 
 async function crop(){
+rctx.clearRect(0,0,200,300);
+let mask=await createMask();
 
-    ctx.clearRect(0,0,200,300);
-    rctx.clearRect(0,0,200,300);
+if(!costume)return;
 
-    const mask = await createMask();
+let i=await img(costume);
+let c=document.createElement("canvas");
+c.width=200;c.height=300;
 
-    if(costume){
-        const img = await loadImage(costume);
+let x=c.getContext("2d");
+x.drawImage(i,0,0,200,300);
+x.globalCompositeOperation="destination-in";
+x.drawImage(mask,0,0);
 
-        const cut = document.createElement("canvas");
-        cut.width = 200;
-        cut.height = 300;
-
-        const c = cut.getContext("2d");
-
-        c.drawImage(img,0,0,200,300);
-        c.globalCompositeOperation = "destination-in";
-        c.drawImage(mask,0,0);
-
-        rctx.drawImage(cut,0,0);
-
-        ctx.drawImage(mask,0,0);
-        ctx.globalAlpha = 0.75;
-        ctx.drawImage(cut,0,0);
-        ctx.globalAlpha = 1;
-
-    }else{
-        ctx.drawImage(mask,0,0);
-    }
-
-    updateSummary();
+rctx.drawImage(c,0,0);
 }
 
-function updateSummary(){
-    let arr=[];
-    if(useBody.checked) arr.push("тело");
-    if(useEars.checked) arr.push("уши: "+ears.value);
-    if(useMane.checked) arr.push("грива: "+mane.value);
-    if(useTail.checked) arr.push("хвост: "+tail.value);
-
-    document.getElementById("summary").textContent =
-        "Выбрано: " + (arr.join(", ") || "ничего");
-}
-
-costumeInput.addEventListener("change",e=>{
-    const reader = new FileReader();
-    reader.onload=()=>{
-        costume=reader.result;
-    };
-    reader.readAsDataURL(e.target.files[0]);
+document.querySelectorAll("input,select").forEach(e=>{
+e.onchange=render;
 });
 
-cropButton.addEventListener("click",crop);
-
-document.querySelectorAll("input,select").forEach(el=>{
-    el.addEventListener("change",updateSummary);
-});
-
-download.onclick=()=>{
-    let name=document.getElementById("filename").value.trim() || "costume";
-    if(!name.endsWith(".png")) name+=".png";
-
-    const a=document.createElement("a");
-    a.download=name;
-    a.href=result.toDataURL("image/png");
-    a.click();
+document.getElementById("costume").onchange=e=>{
+let r=new FileReader();
+r.onload=()=>{
+costume=r.result;
+render();
+};
+r.readAsDataURL(e.target.files[0]);
 };
 
-updateSummary();
+document.getElementById("crop").onclick=crop;
+
+document.getElementById("download").onclick=()=>{
+let n=document.getElementById("filename").value.trim()||"costume";
+if(!n.endsWith(".png"))n+=".png";
+let a=document.createElement("a");
+a.download=n;
+a.href=result.toDataURL();
+a.click();
+};
+
+render();
