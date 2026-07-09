@@ -7,69 +7,108 @@ const rctx=result.getContext("2d");
 
 let costume=null;
 
-function loadImage(src){
+function load(src){
 return new Promise(resolve=>{
-const img=new Image();
+let img=new Image();
 img.onload=()=>resolve(img);
 img.src=src;
 });
 }
 
-async function draw(){
-
-ctx.clearRect(0,0,200,300);
-
-let layers=[
-"assets/body.png",
-`assets/mane/${mane.value}.png`,
-`assets/ears/${ears.value}.png`,
-`assets/tails/${tail.value}.png`
-];
-
-for(const src of layers){
+async function addLayer(context,src){
 try{
-const img=await loadImage(src);
-ctx.drawImage(img,0,0,200,300);
+let img=await load(src);
+context.drawImage(img,0,0,200,300);
 }catch(e){}
 }
 
+async function makeMask(){
+
+let mask=document.createElement("canvas");
+mask.width=200;
+mask.height=300;
+
+let m=mask.getContext("2d");
+
+if(useBody.checked)
+await addLayer(m,"assets/body.png");
+
+if(useEars.checked)
+await addLayer(m,`assets/ears/${ears.value}.png`);
+
+if(useMane.checked)
+await addLayer(m,`assets/mane/${mane.value}.png`);
+
+if(useTail.checked)
+await addLayer(m,`assets/tails/${tail.value}.png`);
+
+return mask;
+}
+
+async function draw(){
+
+ctx.clearRect(0,0,200,300);
 rctx.clearRect(0,0,200,300);
 
-if(costume){
-const img=await loadImage(costume);
-rctx.drawImage(img,0,0,200,300);
-}
+let mask=await makeMask();
+
+ctx.drawImage(mask,0,0);
+
+if(!costume) return;
+
+let source=await load(costume);
+
+let cut=document.createElement("canvas");
+cut.width=200;
+cut.height=300;
+
+let c=cut.getContext("2d");
+
+c.drawImage(source,0,0,200,300);
+
+c.globalCompositeOperation="destination-in";
+
+if(alphaMode.checked){
+
+// учитываем прозрачность выбранных PNG слоев
+c.drawImage(mask,0,0);
+
+}else{
+
+// обычный режим по собранной форме
+c.drawImage(mask,0,0);
 
 }
 
-document.querySelectorAll("select").forEach(el=>{
-el.addEventListener("change",draw);
+rctx.drawImage(cut,0,0);
+
+ctx.globalAlpha=.75;
+ctx.drawImage(cut,0,0);
+ctx.globalAlpha=1;
+
+}
+
+document.querySelectorAll("select,input").forEach(el=>{
+el.onchange=draw;
 });
 
-document.getElementById("costume").addEventListener("change",e=>{
-const reader=new FileReader();
+costume.onchange=e=>{
+let reader=new FileReader();
 reader.onload=()=>{
 costume=reader.result;
 draw();
 };
 reader.readAsDataURL(e.target.files[0]);
-});
-
-
-document.getElementById("download").onclick=()=>{
-
-let name=document.getElementById("filename").value.trim();
-
-if(!name) name="costume";
-
-if(!name.endsWith(".png")) name+=".png";
-
-const link=document.createElement("a");
-link.download=name;
-link.href=result.toDataURL("image/png");
-link.click();
-
 };
 
+download.onclick=()=>{
+let name=filename.value.trim() || "costume";
+if(!name.endsWith(".png")) name+=".png";
+
+let a=document.createElement("a");
+a.download=name;
+a.href=result.toDataURL("image/png");
+a.click();
+};
 
 draw();

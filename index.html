@@ -11,10 +11,11 @@
 
 <div class="app">
 
-<aside class="panel">
-<h2>Выбор частей</h2>
+<div class="panel">
+<h2>Область вырезания</h2>
 
-<h3>Уши</h3>
+<label><input id="useBody" type="checkbox" checked> Тело</label>
+<label><input id="useEars" type="checkbox" checked> Уши</label>
 <select id="ears">
 <option>прямые</option>
 <option>вислые</option>
@@ -23,7 +24,7 @@
 <option>кёрл</option>
 </select>
 
-<h3>Грива</h3>
+<label><input id="useMane" type="checkbox" checked> Грива</label>
 <select id="mane">
 <option>none</option>
 <option>умеренная</option>
@@ -31,7 +32,7 @@
 <option>пышная</option>
 </select>
 
-<h3>Хвост</h3>
+<label><input id="useTail" type="checkbox" checked> Хвост</label>
 <select id="tail">
 <option>куцый</option>
 <option>тонкий</option>
@@ -42,31 +43,33 @@
 <option>беличий</option>
 </select>
 
-<h3>Костюм PNG</h3>
+<h2>Режим маски</h2>
+<label>
+<input id="alphaMode" type="checkbox" checked>
+Использовать прозрачность PNG
+</label>
+
+<h2>Костюм</h2>
 <input type="file" id="costume" accept="image/png">
-
-</aside>
-
-
-<section class="preview">
-<h2>Модель + костюм</h2>
-<canvas id="model" width="200" height="300"></canvas>
-</section>
-
-
-<section class="preview">
-<h2>Обрезанный костюм</h2>
-<canvas id="result" width="200" height="300"></canvas>
-</section>
 
 </div>
 
+<div class="box">
+<h2>Модель + костюм</h2>
+<canvas id="model" width="200" height="300"></canvas>
+</div>
+
+<div class="box">
+<h2>Вырезанный костюм</h2>
+<canvas id="result" width="200" height="300"></canvas>
+</div>
+
+</div>
 
 <div class="save">
 <input id="filename" placeholder="Название файла">
 <button id="download">Скачать PNG</button>
 </div>
-
 
 <script src="script.js"></script>
 </body>
