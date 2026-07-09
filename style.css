@@ -2,7 +2,7 @@
 body{
 margin:0;
 min-height:100vh;
-background:#1c1c1c;
+background:#1b1b1b;
 color:white;
 font-family:Arial,sans-serif;
 display:flex;
@@ -17,55 +17,50 @@ margin:25px;
 .app{
 display:flex;
 gap:25px;
-justify-content:center;
 align-items:flex-start;
+justify-content:center;
+}
+
+.panel,.preview{
+background:#333;
+border-radius:16px;
+padding:20px;
 }
 
 .panel{
 width:240px;
-background:#555;
-padding:20px;
-border-radius:16px;
 }
 
-.box{
-background:#242424;
-padding:20px;
-border-radius:16px;
+.preview{
 text-align:center;
 }
 
 canvas{
 width:200px;
 height:300px;
-background:#333;
-}
-
-.option{
-display:block;
-padding:8px;
-margin:5px 0;
-background:#666;
+background:#222;
 border-radius:8px;
-cursor:pointer;
 }
 
-.option input{
-display:none;
+select,input{
+width:100%;
+padding:8px;
+margin-bottom:12px;
+box-sizing:border-box;
 }
 
-.option:has(input:checked){
-background:#f89c0b;
-color:black;
-}
-
-button{
+.save{
 margin-top:25px;
-padding:14px 50px;
-border:0;
-border-radius:12px;
+width:520px;
+display:flex;
+gap:15px;
+}
+
+.save button{
 background:#43b83f;
 color:white;
-font-size:18px;
+border:0;
+border-radius:10px;
+padding:10px 25px;
 cursor:pointer;
 }
