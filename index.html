@@ -6,79 +6,55 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <h1>Cat Costume Creator</h1>
 
-<div class="layout">
-
+<div class="app">
 <div class="panel">
+<h2>1. Модель кота</h2>
 
-<h2>Модель кота</h2>
-
-<label>Уши</label>
 <select id="ears">
-<option>прямые</option>
-<option>вислые</option>
-<option>длинные</option>
-<option>раскосые</option>
-<option>кёрл</option>
+<option>прямые</option><option>вислые</option><option>длинные</option><option>раскосые</option><option>кёрл</option>
 </select>
 
-<label>Грива</label>
 <select id="mane">
-<option>none</option>
-<option>умеренная</option>
-<option>пушистая</option>
-<option>пышная</option>
+<option>none</option><option>умеренная</option><option>пушистая</option><option>пышная</option>
 </select>
 
-<label>Хвост</label>
 <select id="tail">
-<option>куцый</option>
-<option>тонкий</option>
-<option>гладкий</option>
-<option>умеренный</option>
-<option>пушистый</option>
-<option>пышный</option>
-<option>беличий</option>
+<option>куцый</option><option>тонкий</option><option>гладкий</option><option>умеренный</option><option>пушистый</option><option>пышный</option><option>беличий</option>
 </select>
 
+<h2>2. Области обрезки</h2>
+<label><input id="cutBody" checked type="checkbox"> Тело</label>
+<label><input id="cutEars" checked type="checkbox"> Уши</label>
+<label><input id="cutMane" checked type="checkbox"> Грива</label>
+<label><input id="cutTail" checked type="checkbox"> Хвост</label>
 
-<h2>Области обрезки</h2>
-
-<label><input id="cutBody" type="checkbox" checked> Тело</label>
-<label><input id="cutEars" type="checkbox" checked> Уши</label>
-<label><input id="cutMane" type="checkbox" checked> Грива</label>
-<label><input id="cutTail" type="checkbox" checked> Хвост</label>
-
-
-<h2>Костюм</h2>
+<h2>3. Костюм</h2>
 <input id="upload" type="file" accept="image/png">
 
-<button id="crop">Обрезать костюм</button>
+<h3>Режим</h3>
+<label><input type="radio" name="mode" checked onclick="cutMode='inside'"> Оставить кота</label>
+<label><input type="radio" name="mode" onclick="cutMode='outside'"> Удалить кота</label>
 
+<button id="crop">Обрезать</button>
 </div>
 
-
-<div class="window">
+<div class="box">
 <h2>Модель + костюм</h2>
 <canvas id="preview" width="200" height="300"></canvas>
 </div>
 
-
-<div class="window">
-<h2>Обрезанный костюм</h2>
+<div class="box">
+<h2>Результат</h2>
 <canvas id="result" width="200" height="300"></canvas>
 </div>
-
 </div>
-
 
 <div class="save">
 <input id="filename" placeholder="Название файла">
 <button id="save">Скачать PNG</button>
 </div>
-
 
 <script src="script.js"></script>
 </body>
