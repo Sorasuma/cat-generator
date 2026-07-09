@@ -2,63 +2,48 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Cat Costume Cutter</title>
+<title>Cat Costume Creator</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="layout">
+<h1>Cat Costume Creator</h1>
+
+<div class="app">
 
 <div class="panel">
-
-<h2>Выбор элементов</h2>
+<h2>Элементы</h2>
 
 <h3>Уши</h3>
-<label><input type="radio" name="ears"> Прямые</label>
-<label><input type="radio" name="ears"> Вислые</label>
-<label><input type="radio" name="ears"> Длинные</label>
-<label><input type="radio" name="ears"> Раскосые</label>
-<label><input type="radio" name="ears"> Кёрл</label>
+<div id="ears"></div>
 
 <h3>Грива</h3>
-<label><input type="radio" name="mane"> Умеренная</label>
-<label><input type="radio" name="mane"> Пушистая</label>
-<label><input type="radio" name="mane"> Пышная</label>
+<div id="mane"></div>
 
 <h3>Хвост</h3>
-<label><input type="radio" name="tail"> Куцый</label>
-<label><input type="radio" name="tail"> Тонкий</label>
-<label><input type="radio" name="tail"> Гладкий</label>
-<label><input type="radio" name="tail"> Умеренный</label>
-<label><input type="radio" name="tail"> Пушистый</label>
-<label><input type="radio" name="tail"> Пышный</label>
-<label><input type="radio" name="tail"> Беличий</label>
+<div id="tails"></div>
 
-<h3>Загрузка костюма</h3>
-<input type="file">
+<h3>Костюм</h3>
+<input type="file" id="costume" accept="image/png">
 
 </div>
 
 
-<div class="preview">
-
+<div class="box">
 <h2>Модель + костюм</h2>
-<canvas width="200" height="300"></canvas>
-
+<canvas id="model" width="200" height="300"></canvas>
 </div>
 
 
-<div class="result">
-
+<div class="box">
 <h2>Обрезанный костюм</h2>
-<canvas width="200" height="300"></canvas>
-
+<canvas id="result" width="200" height="300"></canvas>
 </div>
 
 </div>
 
+<button id="download">Скачать PNG</button>
 
-<button class="download">Скачать PNG</button>
-
+<script src="script.js"></script>
 </body>
 </html>

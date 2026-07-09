@@ -1,29 +1,37 @@
 
 body{
 margin:0;
-background:#202020;
-font-family:Arial;
+min-height:100vh;
+background:#1c1c1c;
 color:white;
+font-family:Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
-.layout{
-display:grid;
-grid-template-columns:260px 240px 240px;
+h1{
+margin:25px;
+}
+
+.app{
+display:flex;
 gap:25px;
-padding:30px;
-align-items:start;
+justify-content:center;
+align-items:flex-start;
 }
 
 .panel{
+width:240px;
 background:#555;
 padding:20px;
-border-radius:15px;
+border-radius:16px;
 }
 
-.preview,.result{
-background:#222;
+.box{
+background:#242424;
 padding:20px;
-border-radius:15px;
+border-radius:16px;
 text-align:center;
 }
 
@@ -33,18 +41,31 @@ height:300px;
 background:#333;
 }
 
-label{
+.option{
 display:block;
-margin:7px 0;
+padding:8px;
+margin:5px 0;
+background:#666;
+border-radius:8px;
+cursor:pointer;
 }
 
-.download{
-margin-left:30px;
-padding:15px 40px;
+.option input{
+display:none;
+}
+
+.option:has(input:checked){
+background:#f89c0b;
+color:black;
+}
+
+button{
+margin-top:25px;
+padding:14px 50px;
+border:0;
+border-radius:12px;
 background:#43b83f;
 color:white;
-border:0;
-border-radius:10px;
 font-size:18px;
 cursor:pointer;
 }
