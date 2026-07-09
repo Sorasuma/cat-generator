@@ -2,51 +2,63 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CatWar Costume Cutter</title>
+<title>Cat Costume Cutter</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<div class="layout">
 
-<div class="sidebar">
-<h1>Кот</h1>
+<div class="panel">
+
+<h2>Выбор элементов</h2>
 
 <h3>Уши</h3>
-<div id="ears"></div>
+<label><input type="radio" name="ears"> Прямые</label>
+<label><input type="radio" name="ears"> Вислые</label>
+<label><input type="radio" name="ears"> Длинные</label>
+<label><input type="radio" name="ears"> Раскосые</label>
+<label><input type="radio" name="ears"> Кёрл</label>
 
 <h3>Грива</h3>
-<div id="mane"></div>
+<label><input type="radio" name="mane"> Умеренная</label>
+<label><input type="radio" name="mane"> Пушистая</label>
+<label><input type="radio" name="mane"> Пышная</label>
 
 <h3>Хвост</h3>
-<div id="tails"></div>
+<label><input type="radio" name="tail"> Куцый</label>
+<label><input type="radio" name="tail"> Тонкий</label>
+<label><input type="radio" name="tail"> Гладкий</label>
+<label><input type="radio" name="tail"> Умеренный</label>
+<label><input type="radio" name="tail"> Пушистый</label>
+<label><input type="radio" name="tail"> Пышный</label>
+<label><input type="radio" name="tail"> Беличий</label>
 
-<label class="upload">
-Загрузить костюм
-<input type="file" id="costume" accept="image/png">
-</label>
-
-<button id="download">Скачать обрезку</button>
-</div>
-
-
-<div class="workspace">
-
-<div>
-<p>Модель</p>
-<canvas id="model" width="200" height="300"></canvas>
-</div>
-
-<div>
-<p>Предпросмотр костюма</p>
-<canvas id="cut" width="200" height="300"></canvas>
-</div>
+<h3>Загрузка костюма</h3>
+<input type="file">
 
 </div>
 
+
+<div class="preview">
+
+<h2>Модель + костюм</h2>
+<canvas width="200" height="300"></canvas>
+
 </div>
 
-<script src="script.js"></script>
+
+<div class="result">
+
+<h2>Обрезанный костюм</h2>
+<canvas width="200" height="300"></canvas>
+
+</div>
+
+</div>
+
+
+<button class="download">Скачать PNG</button>
+
 </body>
 </html>

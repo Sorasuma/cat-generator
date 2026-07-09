@@ -1,80 +1,50 @@
+
 body{
 margin:0;
-background:#181818;
+background:#202020;
+font-family:Arial;
 color:white;
-font-family:Arial,sans-serif;
 }
 
-.app{
-display:flex;
+.layout{
+display:grid;
+grid-template-columns:260px 240px 240px;
 gap:25px;
-padding:25px;
-align-items:flex-start;
+padding:30px;
+align-items:start;
 }
 
-.sidebar{
-width:220px;
-background:#242424;
+.panel{
+background:#555;
 padding:20px;
 border-radius:15px;
 }
 
-h1{
-margin-top:0;
-}
-
-label{
-display:block;
-}
-
-.option{
-display:block;
-background:#333;
-padding:7px;
-margin:5px 0;
-border-radius:8px;
-cursor:pointer;
-}
-
-input[type=radio]{
-display:none;
-}
-
-input:checked + span{
-color:#f89c0b;
-}
-
-.upload{
-margin-top:20px;
-background:#333;
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-}
-
-.upload input{
-display:none;
-}
-
-button{
-margin-top:15px;
-width:100%;
-padding:10px;
-border:0;
-border-radius:10px;
-background:#f89c0b;
-cursor:pointer;
-}
-
-.workspace{
-display:flex;
-gap:25px;
+.preview,.result{
+background:#222;
+padding:20px;
+border-radius:15px;
+text-align:center;
 }
 
 canvas{
 width:200px;
 height:300px;
-background:#222;
+background:#333;
+}
+
+label{
+display:block;
+margin:7px 0;
+}
+
+.download{
+margin-left:30px;
+padding:15px 40px;
+background:#43b83f;
+color:white;
+border:0;
 border-radius:10px;
-image-rendering:auto;
+font-size:18px;
+cursor:pointer;
 }
