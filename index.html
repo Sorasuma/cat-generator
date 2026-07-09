@@ -8,14 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="app">
 
-<section class="panel">
+<div class="panel">
 
 <h2>Модель кота</h2>
 
+<label>Уши</label>
 <select id="ears">
 <option>прямые</option>
 <option>вислые</option>
@@ -24,6 +26,14 @@
 <option>кёрл</option>
 </select>
 
+<label>Щеки</label>
+<select id="cheeks">
+<option>короткая</option>
+<option>умеренная</option>
+<option>длинная</option>
+</select>
+
+<label>Грива</label>
 <select id="mane">
 <option>none</option>
 <option>умеренная</option>
@@ -31,6 +41,7 @@
 <option>пышная</option>
 </select>
 
+<label>Хвост</label>
 <select id="tail">
 <option>куцый</option>
 <option>тонкий</option>
@@ -44,36 +55,44 @@
 
 <h2>Области обрезки</h2>
 
-<label class="check"><input id="cutBody" checked type="checkbox"><span>Тело</span></label>
-<label class="check"><input id="cutEars" checked type="checkbox"><span>Уши</span></label>
-<label class="check"><input id="cutMane" checked type="checkbox"><span>Грива</span></label>
-<label class="check"><input id="cutTail" checked type="checkbox"><span>Хвост</span></label>
+<label class="check"><input id="cutBody" checked type="checkbox">Тело</label>
+<label class="check"><input id="cutCheeks" checked type="checkbox">Щеки</label>
+<label class="check"><input id="cutEars" checked type="checkbox">Уши</label>
+<label class="check"><input id="cutMane" checked type="checkbox">Грива</label>
+<label class="check"><input id="cutTail" checked type="checkbox">Хвост</label>
 
 
 <h2>Костюм</h2>
-
 <input id="upload" type="file" accept="image/png">
 
-<div class="mode">
-<label class="check"><input type="radio" name="mode" value="inside" checked><span>Оставить выбранную область</span></label>
-<label class="check"><input type="radio" name="mode" value="outside"><span>Удалить выбранную область</span></label>
-</div>
+<h2>Режим</h2>
+
+<label class="check">
+<input type="radio" name="mode" value="inside" checked>
+Оставить область
+</label>
+
+<label class="check">
+<input type="radio" name="mode" value="outside">
+Удалить область
+</label>
+
 
 <button id="crop">Обрезать</button>
 
-</section>
+</div>
 
 
-<section class="preview">
+<div class="preview">
 <h2>Модель + костюм</h2>
 <canvas id="model" width="200" height="300"></canvas>
-</section>
+</div>
 
 
-<section class="preview">
+<div class="preview">
 <h2>Результат</h2>
 <canvas id="result" width="200" height="300"></canvas>
-</section>
+</div>
 
 </div>
 
@@ -82,6 +101,7 @@
 <input id="filename" placeholder="Название файла">
 <button id="download">Скачать PNG</button>
 </div>
+
 
 <script src="script.js"></script>
 </body>
