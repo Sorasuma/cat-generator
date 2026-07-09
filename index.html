@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -10,7 +10,6 @@
 <body>
 
 <div class="app">
-
 <div class="panel">
 <h2>Модель кота</h2>
 
@@ -35,12 +34,11 @@
 </select>
 
 <h2>Области обрезки</h2>
-
-<label class="check"><input id="cutBody" checked type="checkbox">Тело</label>
-<label class="check"><input id="cutCheeks" checked type="checkbox">Щеки</label>
-<label class="check"><input id="cutEars" checked type="checkbox">Уши</label>
-<label class="check"><input id="cutMane" checked type="checkbox">Грива</label>
-<label class="check"><input id="cutTail" checked type="checkbox">Хвост</label>
+<label class="check"><input id="cutBody" type="checkbox" checked>Тело</label>
+<label class="check"><input id="cutCheeks" type="checkbox" checked>Щеки</label>
+<label class="check"><input id="cutEars" type="checkbox" checked>Уши</label>
+<label class="check"><input id="cutMane" type="checkbox" checked>Грива</label>
+<label class="check"><input id="cutTail" type="checkbox" checked>Хвост</label>
 
 <h2>Костюм</h2>
 <input id="upload" type="file" accept="image/png">
@@ -52,21 +50,23 @@
 <button id="crop">Обрезать</button>
 </div>
 
+<div class="right">
+<div class="previews">
 <div class="preview">
 <h2>Модель + костюм</h2>
 <canvas id="model" width="200" height="300"></canvas>
 </div>
-
 <div class="preview">
 <h2>Результат</h2>
 <canvas id="result" width="200" height="300"></canvas>
+</div>
 </div>
 
 <div class="save">
 <input id="filename" placeholder="Название файла">
 <button id="download">Скачать PNG</button>
 </div>
-
+</div>
 </div>
 
 <script src="script.js"></script>
