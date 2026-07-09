@@ -3,57 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cat Generator</title>
-
+<title>CatWar Costume Cutter</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+<div class="app">
 
-<h1>Генератор котов</h1>
+<div class="sidebar">
+<h1>Кот</h1>
 
-<div class="preview">
-    <canvas id="canvas"></canvas>
-</div>
-
-
-<div class="controls">
-
-<section>
-<h2>Уши</h2>
+<h3>Уши</h3>
 <div id="ears"></div>
-</section>
 
-
-<section>
-<h2>Грива</h2>
+<h3>Грива</h3>
 <div id="mane"></div>
-</section>
 
-
-<section>
-<h2>Хвост</h2>
+<h3>Хвост</h3>
 <div id="tails"></div>
-</section>
+
+<label class="upload">
+Загрузить костюм
+<input type="file" id="costume" accept="image/png">
+</label>
+
+<button id="download">Скачать обрезку</button>
+</div>
 
 
-<button id="random">
-Случайный кот
-</button>
+<div class="workspace">
 
-<button id="download">
-Скачать PNG
-</button>
+<div>
+<p>Модель</p>
+<canvas id="model" width="200" height="300"></canvas>
+</div>
 
+<div>
+<p>Предпросмотр костюма</p>
+<canvas id="cut" width="200" height="300"></canvas>
 </div>
 
 </div>
 
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
