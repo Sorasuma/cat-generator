@@ -1,7 +1,6 @@
 
 const model=document.getElementById("model");
 const result=document.getElementById("result");
-
 const ctx=model.getContext("2d");
 const rctx=result.getContext("2d");
 
@@ -15,37 +14,29 @@ img.src=src;
 });
 }
 
-async function addLayer(context,src){
-try{
-let img=await load(src);
-context.drawImage(img,0,0,200,300);
-}catch(e){}
-}
-
 async function makeMask(){
 
 let mask=document.createElement("canvas");
 mask.width=200;
 mask.height=300;
-
 let m=mask.getContext("2d");
 
-if(useBody.checked)
-await addLayer(m,"assets/body.png");
-
-if(useEars.checked)
-await addLayer(m,`assets/ears/${ears.value}.png`);
-
-if(useMane.checked)
-await addLayer(m,`assets/mane/${mane.value}.png`);
-
-if(useTail.checked)
-await addLayer(m,`assets/tails/${tail.value}.png`);
+if(useBody.checked) await draw(m,"assets/body.png");
+if(useEars.checked) await draw(m,`assets/ears/${ears.value}.png`);
+if(useMane.checked && mane.value!="none") await draw(m,`assets/mane/${mane.value}.png`);
+if(useTail.checked) await draw(m,`assets/tails/${tail.value}.png`);
 
 return mask;
 }
 
-async function draw(){
+async function draw(c,src){
+try{
+let img=await load(src);
+c.drawImage(img,0,0,200,300);
+}catch(e){}
+}
+
+async function crop(){
 
 ctx.clearRect(0,0,200,300);
 rctx.clearRect(0,0,200,300);
@@ -56,7 +47,7 @@ ctx.drawImage(mask,0,0);
 
 if(!costume) return;
 
-let source=await load(costume);
+let img=await load(costume);
 
 let cut=document.createElement("canvas");
 cut.width=200;
@@ -64,21 +55,9 @@ cut.height=300;
 
 let c=cut.getContext("2d");
 
-c.drawImage(source,0,0,200,300);
-
+c.drawImage(img,0,0,200,300);
 c.globalCompositeOperation="destination-in";
-
-if(alphaMode.checked){
-
-// учитываем прозрачность выбранных PNG слоев
 c.drawImage(mask,0,0);
-
-}else{
-
-// обычный режим по собранной форме
-c.drawImage(mask,0,0);
-
-}
 
 rctx.drawImage(cut,0,0);
 
@@ -86,29 +65,38 @@ ctx.globalAlpha=.75;
 ctx.drawImage(cut,0,0);
 ctx.globalAlpha=1;
 
+updateSummary();
 }
 
-document.querySelectorAll("select,input").forEach(el=>{
-el.onchange=draw;
+function updateSummary(){
+let a=[];
+if(useBody.checked)a.push("тело");
+if(useEars.checked)a.push("уши: "+ears.value);
+if(useMane.checked)a.push("грива: "+mane.value);
+if(useTail.checked)a.push("хвост: "+tail.value);
+
+summary.textContent="Выбрано: "+a.join(", ");
+}
+
+document.querySelectorAll("input,select").forEach(x=>{
+x.onchange=updateSummary;
 });
 
 costume.onchange=e=>{
-let reader=new FileReader();
-reader.onload=()=>{
-costume=reader.result;
-draw();
+let r=new FileReader();
+r.onload=()=>costume=r.result;
+r.readAsDataURL(e.target.files[0]);
 };
-reader.readAsDataURL(e.target.files[0]);
-};
+
+crop.onclick=crop;
 
 download.onclick=()=>{
-let name=filename.value.trim() || "costume";
-if(!name.endsWith(".png")) name+=".png";
-
+let n=filename.value.trim()||"costume";
+if(!n.endsWith(".png"))n+=".png";
 let a=document.createElement("a");
-a.download=name;
-a.href=result.toDataURL("image/png");
+a.download=n;
+a.href=result.toDataURL();
 a.click();
 };
 
-draw();
+updateSummary();

@@ -1,7 +1,6 @@
 
 body{
-margin:0;
-background:#1c1c1c;
+background:#191919;
 color:white;
 font-family:Arial,sans-serif;
 display:flex;
@@ -12,7 +11,7 @@ align-items:center;
 .app{
 display:flex;
 gap:25px;
-align-items:flex-start;
+margin-top:20px;
 }
 
 .panel,.box{
@@ -22,7 +21,7 @@ border-radius:16px;
 }
 
 .panel{
-width:250px;
+width:260px;
 }
 
 .box{
@@ -35,24 +34,39 @@ height:300px;
 background:#222;
 }
 
-select,input{
-width:100%;
-margin:8px 0;
-padding:8px;
-box-sizing:border-box;
+.check{
+display:flex;
+gap:10px;
+font-size:18px;
+margin-top:12px;
 }
 
-.save{
-margin-top:25px;
-display:flex;
-gap:15px;
+select,input{
+width:100%;
+padding:8px;
+margin:8px 0;
+box-sizing:border-box;
 }
 
 button{
 background:#43b83f;
 color:white;
 border:0;
-padding:12px 30px;
 border-radius:10px;
+padding:12px 25px;
 cursor:pointer;
+margin-top:10px;
+}
+
+#summary{
+margin-top:20px;
+background:#333;
+padding:12px 20px;
+border-radius:10px;
+}
+
+.save{
+display:flex;
+gap:15px;
+margin-top:15px;
 }
