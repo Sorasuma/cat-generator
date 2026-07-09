@@ -2,10 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Cat Costume Creator</title>
+<title>Обрезалка</title>
+
+<link rel="icon" href="favicon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -28,6 +32,7 @@
 
 <label>Щеки</label>
 <select id="cheeks">
+<option>none</option>
 <option>короткая</option>
 <option>умеренная</option>
 <option>длинная</option>
@@ -65,16 +70,17 @@
 <h2>Костюм</h2>
 <input id="upload" type="file" accept="image/png">
 
+
 <h2>Режим</h2>
 
 <label class="check">
 <input type="radio" name="mode" value="inside" checked>
-Оставить область
+<span>В модельке</span>
 </label>
 
 <label class="check">
 <input type="radio" name="mode" value="outside">
-Удалить область
+<span>За моделькой</span>
 </label>
 
 
