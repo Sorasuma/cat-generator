@@ -1,5 +1,6 @@
 
 body{
+margin:0;
 background:#191919;
 color:white;
 font-family:Arial,sans-serif;
@@ -8,10 +9,12 @@ flex-direction:column;
 align-items:center;
 }
 
+h1{margin:25px;}
+
 .app{
 display:flex;
 gap:25px;
-margin-top:20px;
+align-items:flex-start;
 }
 
 .panel,.box{
@@ -20,13 +23,8 @@ padding:20px;
 border-radius:16px;
 }
 
-.panel{
-width:260px;
-}
-
-.box{
-text-align:center;
-}
+.panel{width:260px;}
+.box{text-align:center;}
 
 canvas{
 width:200px;
@@ -36,15 +34,21 @@ background:#222;
 
 .check{
 display:flex;
+align-items:center;
+justify-content:flex-start;
 gap:10px;
 font-size:18px;
-margin-top:12px;
+margin:12px 0;
+}
+
+.check input{
+width:auto;
 }
 
 select,input{
 width:100%;
 padding:8px;
-margin:8px 0;
+margin-bottom:12px;
 box-sizing:border-box;
 }
 
@@ -55,7 +59,6 @@ border:0;
 border-radius:10px;
 padding:12px 25px;
 cursor:pointer;
-margin-top:10px;
 }
 
 #summary{
