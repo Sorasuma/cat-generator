@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Уникальные окрасы</title>
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="tabs">
+    <a href="index.html" class="tab">Обычные окрасы</a>
+    <a href="unique.html" class="tab active">Уникальные окрасы</a>
+</nav>
+
+<div class="app">
+
+<div class="panel">
+
+<h2>Уникальный окрас</h2>
+
+<label>Выберите окрас</label>
+
+<select id="uniqueSelect">
+    <option value="bengal.png">Бенгал</option>
+    <option value="clouded_leopard.png">Дымчатый леопард</option>
+    <option value="point25.png">Поинт (25-26)</option>
+    <option value="point27.png">Поинт (27)</option>
+    <option value="neva.png">Невская</option>
+    <option value="persian.png">Перс</option>
+    <option value="sphynx.png">Сфинкс</option>
+    <option value="oriental45.png">Ориентал (45)</option>
+    <option value="lykoi.png">Ликой</option>
+    <option value="oriental4748.png">Ориентал (47-48)</option>
+</select>
+
+<h2>Костюм</h2>
+
+<input id="upload" type="file" accept="image/png">
+
+<h2>Режим</h2>
+
+<label class="check">
+    <input type="radio" name="mode" value="inside" checked>
+    В модельке
+</label>
+
+<label class="check">
+    <input type="radio" name="mode" value="outside">
+    За моделькой
+</label>
+
+<button id="crop">Обрезать</button>
+
+</div>
+
+<div class="right">
+
+<div class="previews">
+
+<div class="preview">
+<h2>Модель + костюм</h2>
+<canvas id="model" width="200" height="300"></canvas>
+</div>
+
+<div class="preview">
+<h2>Результат</h2>
+<canvas id="result" width="200" height="300"></canvas>
+</div>
+
+</div>
+
+<div class="save">
+<input id="filename" placeholder="Название файла">
+<button id="download">Скачать PNG</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="unique.js"></script>
+
+</body>
+</html>
