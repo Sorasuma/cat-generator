@@ -154,6 +154,7 @@ canvas {
     height: 300px;
     background: #222;
     border-radius: 14px;
+    cursor: grab;
 }
 
 /* ---------------- Кнопки ---------------- */
@@ -207,4 +208,8 @@ button {
 
 .footer a:hover {
     color: #e5c17b;
+}
+
+canvas:active {
+    cursor: grabbing;
 }
