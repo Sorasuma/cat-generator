@@ -213,3 +213,22 @@ button {
 canvas:active {
     cursor: grabbing;
 }
+
+.position{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:6px;
+    margin-bottom:14px;
+}
+
+.position span{
+    font-size:14px;
+    color:#bdbdbd;
+}
+
+.position button{
+    padding:8px 16px;
+    font-size:13px;
+}
