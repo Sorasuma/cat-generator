@@ -18,29 +18,29 @@ button{background:#D36C07;color:white;border:1px solid #ffffff33;border-radius:9
 .save{display:flex;gap:15px;align-items:center;width:100%}
 .save input{margin:0;flex:1}
 /* ---------- Вкладки ---------- */
-
-.tabs {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 20px auto 30px;
+.tabs{
+    width:1200px;
+    margin:30px auto 15px;
+    display:flex;
+    gap:10px;
 }
 
-.tab {
-    padding: 10px 22px;
-    border-radius: 12px;
-    background: #2f2f2f;
-    color: #fff;
-    text-decoration: none;
-    transition: .2s;
-    font-weight: 600;
+.tab{
+    display:inline-block;
+    padding:10px 20px;
+    background:#2d2d2d;
+    border-radius:12px;
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    transition:.2s;
 }
 
-.tab:hover {
-    background: #454545;
+.tab:hover{
+    background:#3b3b3b;
 }
 
-.tab.active {
-    background: #e5c17b;
-    color: #222;
+.tab.active{
+    background:#e5c17b;
+    color:#222;
 }
