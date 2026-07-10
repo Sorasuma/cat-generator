@@ -185,3 +185,26 @@ button {
     flex: 1;
     margin: 0;
 }
+
+/* ---------- Подвал ---------- */
+
+.footer {
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    color: #7b7b7b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.footer a {
+    color: #bdbdbd;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.footer a:hover {
+    color: #e5c17b;
+}
