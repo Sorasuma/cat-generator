@@ -3,6 +3,8 @@ let costume = null;
 let catCache = null;
 let offsetX = 0;
 let offsetY = 0;
+const offsetXValue = document.getElementById("offsetXValue");
+const offsetYValue = document.getElementById("offsetYValue");
 
 let dragging = false;
 
@@ -103,11 +105,11 @@ async function render(){
 
     mctx.clearRect(0,0,200,300);
 
-if (!catCache) {
-    catCache = await createCat();
-}
+    if (!catCache) {
+        catCache = await createCat();
+    }
 
-mctx.drawImage(catCache, 0, 0);
+    mctx.drawImage(catCache, 0, 0);
 
     if(costume){
 
@@ -118,6 +120,10 @@ mctx.drawImage(catCache, 0, 0);
         mctx.globalAlpha = 1;
 
     }
+
+    // координаты тут
+    offsetXValue.textContent = Math.round(offsetX);
+    offsetYValue.textContent = Math.round(offsetY);
 
 }
 
@@ -277,6 +283,15 @@ document.addEventListener("keydown", e => {
     }
 
     e.preventDefault();
+    render();
+
+});
+
+document.getElementById("resetPosition").addEventListener("click", ()=>{
+
+    offsetX = 0;
+    offsetY = 0;
+
     render();
 
 });
