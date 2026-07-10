@@ -1,46 +1,185 @@
+/* ---------------- Общие ---------------- */
 
-*{box-sizing:border-box}
-body{margin:0;background:#191919;color:#f5f5f5;font-family:Montserrat,sans-serif;display:flex;justify-content:center}
-.app{display:flex;gap:24px;margin-top:40px;align-items:flex-start}
-.panel,.preview{background:#303030;border-radius:22px;padding:22px;box-shadow:0 15px 35px #0005}
-.panel{width:280px}
-.right{display:flex;flex-direction:column;gap:15px}
-.previews{display:flex;gap:24px}
-.preview{width:250px;text-align:center}
-h2{font-size:20px;font-weight:700;margin-top:0}
-select,input[type=file],.save input{width:100%;height:38px;border-radius:12px;border:0;padding:0 12px;margin-bottom:12px;font-family:inherit}
-.check{display:flex;align-items:center;gap:10px;margin:10px 0}
-.check input{appearance:none;width:18px;height:18px;border-radius:50%;background:#777;margin:0}
-.check input:checked{background:#D36C07}
-.check input:checked:after{content:"";display:block;width:6px;height:6px;background:white;border-radius:50%;margin:6px}
-canvas{width:200px;height:300px;background:#222;border-radius:14px}
-button{background:#D36C07;color:white;border:1px solid #ffffff33;border-radius:999px;padding:12px 28px;font-family:inherit;font-weight:700;cursor:pointer}
-.save{display:flex;gap:15px;align-items:center;width:100%}
-.save input{margin:0;flex:1}
-/* ---------- Вкладки ---------- */
-.tabs{
-    width:1200px;
-    margin:30px auto 15px;
-    display:flex;
-    gap:10px;
+* {
+    box-sizing: border-box;
 }
 
-.tab{
-    display:inline-block;
-    padding:10px 20px;
-    background:#2d2d2d;
-    border-radius:12px;
-    color:white;
-    text-decoration:none;
-    font-weight:700;
-    transition:.2s;
+body {
+    margin: 0;
+    background: #191919;
+    color: #f5f5f5;
+    font-family: Montserrat, sans-serif;
 }
 
-.tab:hover{
-    background:#3b3b3b;
+.page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
 }
 
-.tab.active{
-    background:#e5c17b;
-    color:#222;
+/* ---------------- Вкладки ---------------- */
+
+.tabs {
+    width: 1180px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 14px;
+    background: #303030;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.tab:hover {
+    background: #3b3b3b;
+}
+
+.tab.active {
+    background: #e5c17b;
+    color: #222;
+}
+
+/* ---------------- Основная часть ---------------- */
+
+.app {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* ---------------- Карточки ---------------- */
+
+.panel,
+.preview {
+    background: #303030;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.35);
+}
+
+.panel {
+    width: 280px;
+}
+
+.preview {
+    width: 250px;
+    text-align: center;
+}
+
+/* ---------------- Правая колонка ---------------- */
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.previews {
+    display: flex;
+    gap: 24px;
+}
+
+/* ---------------- Заголовки ---------------- */
+
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* ---------------- Поля ---------------- */
+
+select,
+input[type="file"],
+.save input {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    margin-bottom: 12px;
+
+    border: none;
+    border-radius: 12px;
+
+    font-family: inherit;
+}
+
+/* ---------------- Чекбоксы ---------------- */
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.check input {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    border-radius: 50%;
+    background: #777;
+}
+
+.check input:checked {
+    background: #D36C07;
+}
+
+.check input:checked::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* ---------------- Canvas ---------------- */
+
+canvas {
+    width: 200px;
+    height: 300px;
+    background: #222;
+    border-radius: 14px;
+}
+
+/* ---------------- Кнопки ---------------- */
+
+button {
+    padding: 12px 28px;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 999px;
+
+    background: #D36C07;
+    color: white;
+
+    font-family: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+/* ---------------- Сохранение ---------------- */
+
+.save {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.save input {
+    flex: 1;
+    margin: 0;
 }
