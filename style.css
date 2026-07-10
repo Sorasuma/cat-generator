@@ -22,10 +22,10 @@ body {
 /* ---------------- Вкладки ---------------- */
 
 .tabs {
-    width: 1180px;
+    width: fit-content;
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
 }
 
 .tab {
@@ -51,9 +51,11 @@ body {
 /* ---------------- Основная часть ---------------- */
 
 .app {
+    width: fit-content;
     display: flex;
     gap: 24px;
     align-items: flex-start;
+    margin: 0 auto;
 }
 
 /* ---------------- Карточки ---------------- */
