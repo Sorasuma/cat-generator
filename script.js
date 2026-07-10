@@ -1,5 +1,15 @@
 
 let costume = null;
+let offsetX = 0;
+let offsetY = 0;
+
+let dragging = false;
+
+let startMouseX = 0;
+let startMouseY = 0;
+
+let startOffsetX = 0;
+let startOffsetY = 0;
 
 const model = document.getElementById("model");
 const result = document.getElementById("result");
@@ -98,7 +108,7 @@ async function render(){
     if(costume){
         const img = await loadImage(costume);
         mctx.globalAlpha = 0.75;
-        mctx.drawImage(img,0,0,200,300);
+        ctx.drawImage(img, offsetX, offsetY, 200, 300);
         mctx.globalAlpha = 1;
     }
 }
@@ -115,6 +125,8 @@ document.getElementById("upload").addEventListener("change", e=>{
 
     reader.onload = ()=>{
         costume = reader.result;
+        offsetX = 0;
+        offsetY = 0;
         render();
     };
 
@@ -135,7 +147,7 @@ document.getElementById("crop").addEventListener("click", async()=>{
 
     const ctx = canvas.getContext("2d");
 
-    ctx.drawImage(img,0,0,200,300);
+    ctx.drawImage(img, offsetX, offsetY, 200, 300);
 
     const mode = document.querySelector("[name=mode]:checked").value;
 
@@ -167,3 +179,85 @@ document.getElementById("download").addEventListener("click",()=>{
 
 
 render();
+
+model.addEventListener("mousedown", e => {
+
+    if (!costume) return;
+
+    dragging = true;
+
+    const rect = model.getBoundingClientRect();
+
+    startMouseX = e.clientX - rect.left;
+    startMouseY = e.clientY - rect.top;
+
+    startOffsetX = offsetX;
+    startOffsetY = offsetY;
+
+});
+
+window.addEventListener("mousemove", e => {
+
+    if (!dragging) return;
+
+    const rect = model.getBoundingClientRect();
+
+    const scaleX = model.width / rect.width;
+    const scaleY = model.height / rect.height;
+
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
+
+    offsetX = startOffsetX + (mouseX - startMouseX * scaleX);
+    offsetY = startOffsetY + (mouseY - startMouseY * scaleY);
+
+    render();
+
+});
+
+window.addEventListener("mouseup", () => {
+
+    dragging = false;
+
+});
+
+document.addEventListener("keydown", e => {
+
+    if (!costume) return;
+
+    // Не реагируем, если пользователь печатает в поле имени файла
+    if (
+        document.activeElement.tagName === "INPUT" ||
+        document.activeElement.tagName === "TEXTAREA"
+    ) {
+        return;
+    }
+
+    const step = e.shiftKey ? 10 : 1;
+
+    switch (e.key) {
+
+        case "ArrowLeft":
+            offsetX -= step;
+            break;
+
+        case "ArrowRight":
+            offsetX += step;
+            break;
+
+        case "ArrowUp":
+            offsetY -= step;
+            break;
+
+        case "ArrowDown":
+            offsetY += step;
+            break;
+
+        default:
+            return;
+    }
+
+    e.preventDefault();
+    render();
+
+});
