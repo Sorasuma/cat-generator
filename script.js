@@ -105,12 +105,16 @@ async function render(){
     const cat = await createCat();
     mctx.drawImage(cat,0,0);
 
-if(costume){
-    const img = await loadImage(costume);
-    mctx.globalAlpha = 0.75;
-    mctx.drawImage(img, offsetX, offsetY, 200, 300);
-    mctx.globalAlpha = 1;
-}
+    if(costume){
+
+        const img = await loadImage(costume);
+
+        mctx.globalAlpha = 0.75;
+        mctx.drawImage(img, offsetX, offsetY, 200, 300);
+        mctx.globalAlpha = 1;
+
+    }
+
 }
 
 
