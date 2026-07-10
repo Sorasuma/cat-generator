@@ -215,17 +215,19 @@ canvas:active {
 }
 
 .position{
+    width:200px;
+    margin:8px auto 0;
+
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:6px;
-    margin-bottom:14px;
+    justify-content:center;
+    gap:14px;
+
+    font-size:13px;
 }
 
 .position span{
-    font-size:14px;
-    color:#bdbdbd;
+    color:#9c9c9c;
+    font-size:13px;
 }
 
 .position button{
