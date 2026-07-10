@@ -105,12 +105,12 @@ async function render(){
     const cat = await createCat();
     mctx.drawImage(cat,0,0);
 
-    if(costume){
-        const img = await loadImage(costume);
-        mctx.globalAlpha = 0.75;
-        ctx.drawImage(img, offsetX, offsetY, 200, 300);
-        mctx.globalAlpha = 1;
-    }
+if(costume){
+    const img = await loadImage(costume);
+    mctx.globalAlpha = 0.75;
+    mctx.drawImage(img, offsetX, offsetY, 200, 300);
+    mctx.globalAlpha = 1;
+}
 }
 
 
@@ -188,8 +188,11 @@ model.addEventListener("mousedown", e => {
 
     const rect = model.getBoundingClientRect();
 
-    startMouseX = e.clientX - rect.left;
-    startMouseY = e.clientY - rect.top;
+    const scaleX = model.width / rect.width;
+    const scaleY = model.height / rect.height;
+
+    startMouseX = (e.clientX - rect.left) * scaleX;
+    startMouseY = (e.clientY - rect.top) * scaleY;
 
     startOffsetX = offsetX;
     startOffsetY = offsetY;
@@ -208,8 +211,8 @@ window.addEventListener("mousemove", e => {
     const mouseX = (e.clientX - rect.left) * scaleX;
     const mouseY = (e.clientY - rect.top) * scaleY;
 
-    offsetX = startOffsetX + (mouseX - startMouseX * scaleX);
-    offsetY = startOffsetY + (mouseY - startMouseY * scaleY);
+    offsetX = startOffsetX + (mouseX - startMouseX);
+    offsetY = startOffsetY + (mouseY - startMouseY);
 
     render();
 
