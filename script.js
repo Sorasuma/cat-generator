@@ -1,5 +1,6 @@
 
 let costume = null;
+let catCache = null;
 let offsetX = 0;
 let offsetY = 0;
 
@@ -102,8 +103,11 @@ async function render(){
 
     mctx.clearRect(0,0,200,300);
 
-    const cat = await createCat();
-    mctx.drawImage(cat,0,0);
+if (!catCache) {
+    catCache = await createCat();
+}
+
+mctx.drawImage(catCache, 0, 0);
 
     if(costume){
 
@@ -119,7 +123,15 @@ async function render(){
 
 
 document.querySelectorAll("select").forEach(select=>{
-    select.addEventListener("change", render);
+
+    select.addEventListener("change", async ()=>{
+
+        catCache = null;
+
+        await render();
+
+    });
+
 });
 
 
