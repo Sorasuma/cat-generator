@@ -295,3 +295,20 @@ canvas:active {
     color:#bcbcbc;
 
 }
+
+/* ---------- котик ---------- */
+.footer-cat{
+
+    display:block;
+
+    margin:12px auto 0;
+
+    width:90px;
+
+    opacity:.85;
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
